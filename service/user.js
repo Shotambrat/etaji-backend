@@ -22,7 +22,8 @@ class UserService {
     }
 
     deleteUser(id) {
-        return userDAO.deleteUser(id);
+        console.log("Del ID", id)
+        return userDAO.deleteUser({id: id});
     }
 }
 

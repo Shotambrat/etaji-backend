@@ -13,7 +13,8 @@ class TaskController {
 
     async getAllTasks(req, res) {
         try {
-            const task = await taskService.getAllTasks(req.body);
+            const task = await taskService.getAllTasks(req.query);
+            console.log(req.query)
             res.status(200).json(task);
         } catch (err) {
             console.error(err);
@@ -33,7 +34,8 @@ class TaskController {
 
     async deleteTask(req, res) {
         try {
-            const task = await taskService.deleteTask(req.body);
+            const task = await taskService.deleteTask(req.params.id);
+            console.log("DEL BODY", req.params.id);
             res.status(200).json(task);
         } catch (err) {
             console.error(err);

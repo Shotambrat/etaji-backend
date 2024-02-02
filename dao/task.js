@@ -23,10 +23,8 @@ class TaskDAO {
     }
 
     async getAllTasks(respons) {
-        const tasks = await db
-            .where(respons)
-            .select('*')
-            .from("task");
+        const tasks = await db("task")
+            .where({respons: respons})
 
         return tasks;
     }
@@ -47,11 +45,11 @@ class TaskDAO {
     }
 
     async deleteTask(id) {
-        const user = await db("task")
+        await db("task")
             .where(id)
             .del();
     
-        return user;
+        return { success: true };
     }
 }
 

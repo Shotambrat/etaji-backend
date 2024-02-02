@@ -20,23 +20,25 @@ class UserDAO {
 
   async getUser(login, password) {
     const user = await db("user")
-        .where({login});
+        .where({ login: login });
 
     if (user) {
         const isPasswordValid = await bcrypt.compare(password, user[0].password_hash);
+        console.log(isPasswordValid);
+        console.log(user[0].password_hash);
     
         if (isPasswordValid) {
             return user;
         } else {
-            return {message: "wrong_password"}
+            throw new Error("Invalid password")
         }
     }
 
-    return user;
+    throw new Error("Invalid user")
   }
 
   async getAllUsers() {
-    const users = await db.select("*").from("user");
+    const users = await db.select("*").from("user").whereNot({"rank": "boss"});
 
     return users;
   }
@@ -58,11 +60,16 @@ class UserDAO {
   }
 
   async deleteUser(id) {
-    const user = await db("user")
-        .where(id)
+    await db.transaction(async trx => {
+      await trx("task")
+        .where("respons", id)
         .del();
+      await trx("user")
+        .where("login", id)
+        .del();
+    });
 
-    return user;
+    return { success: true };
   }
 }
 

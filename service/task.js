@@ -7,7 +7,10 @@ class TaskService {
         return taskDAO.createTask(title, description, deadline, prioritet, status, respons);
     }
 
-    getAllTasks(respons) {
+    getAllTasks(data) {
+        const {respons} = data
+        console.log("Respons", respons);
+        console.log("Data", data)
         return taskDAO.getAllTasks(respons);
     }
 
@@ -17,7 +20,8 @@ class TaskService {
     }
 
     deleteTask(id) {
-        return taskDAO.deleteTask(id);
+        console.log(id)
+        return taskDAO.deleteTask({id: id});
     }
 }
 
