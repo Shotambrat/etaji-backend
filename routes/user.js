@@ -9,7 +9,7 @@ router.get('/api/users', userController.getAllUsers);
 router.get('/api/user', userController.getUser);
 router.post('/api/user', userController.createUser);
 router.put('/api/user', userController.updateUser);
-router.delete('/api/user/:id', userController.deleteUser);
+router.delete('/api/user', userController.deleteUser);
 
 router.get('/api/tasks', taskController.getAllTasks);
 router.post('/api/task', taskController.createTask);

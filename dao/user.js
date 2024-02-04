@@ -59,16 +59,16 @@ class UserDAO {
     return user;
   }
 
-  async deleteUser(id) {
+  async deleteUser(login) {
     await db.transaction(async trx => {
       await trx("task")
-        .where("respons", id)
+        .where("respons", login)
         .del();
       await trx("user")
-        .where("login", id)
+        .where("login", login)
         .del();
     });
-
+  
     return { success: true };
   }
 }

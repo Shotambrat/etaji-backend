@@ -23,7 +23,7 @@ exports.up = function (knex) {
             // table.string("updated_at").notNullable();
             table.string("prioritet").notNullable();
             table.string("status").notNullable();
-            table.string("respons").unsigned().references("login").inTable("user");
+            table.string("respons").unsigned().references("login").inTable("user").onDelete('CASCADE');
             table.timestamps(true, true);
         });
 };

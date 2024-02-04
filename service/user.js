@@ -21,9 +21,9 @@ class UserService {
         return userDAO.updateUser(id, first_name, last_name, middle_name, login, password, rank);
     }
 
-    deleteUser(id) {
-        console.log("Del ID", id)
-        return userDAO.deleteUser({id: id});
+    deleteUser(login) {
+        console.log("Del Login", login)
+        return userDAO.deleteUser({login: login});
     }
 }
 
